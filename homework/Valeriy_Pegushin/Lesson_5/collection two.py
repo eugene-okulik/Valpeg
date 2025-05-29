@@ -23,6 +23,6 @@ subjects = ['math', 'biology', 'geography']
 # ', '.join(students) объединяет список студентов через запятую с пробелом
 # ', '.join(subjects) объединяет список предметов через запятую с пробелом
 # f-строка (форматированная строка) подставляет эти объединённые списки в нужные места шаблона
-txt = f'Students {', '.join(students)} study these subjects: {', '.join(subjects)}'
+txt = f"Students {', '.join(students)} study these subjects: {', '.join(subjects)}"
 
 print(txt)
