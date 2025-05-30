@@ -7,15 +7,17 @@ result_operation_one = 'результат операции: 42'
 result_operation_two = 'результат операции: 514'
 result_work = 'результат работы программы: 9'
 
-# Разбиваем строку на список, берём последний элемент, преобразуем в число и прибавляем к каждому  числу 10
-number_onne = int(result_operation_one.split()[-1]) + 10
-number_two = int(result_operation_two.split()[-1]) + 10
-number_three = int(result_work.split()[-1]) + 10
+# Находим индекс двоеточия
+index_colon_one = result_operation_one.index(':')
+index_colon_two = result_operation_two.index(':')
+index_colon_three= result_work.index(':')
 
-# print(number_onne)
-# print(number_two)
-# print(number_three)
-print(number_onne, number_two, number_three)
+# Преобразуем срез после ": " в число и прибавляем к нему 10
+number_one = int(result_operation_one[index_colon_one + 2:]) + 10
+number_two = int(result_operation_two[index_colon_two + 2:]) + 10
+number_three = int(result_work[index_colon_three + 2:]) + 10
+
+print(number_one, number_two, number_three)
 
 students = ['Ivanov', 'Petrov', 'Sidorov']
 subjects = ['math', 'biology', 'geography']
