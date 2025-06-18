@@ -5,6 +5,8 @@ def process_result(message):
     num = int(message.split(': ')[1])
     # Завершаем выполнение функции и к числу прибавляем 10
     return num + 10
+
+
 # Исходные данные
 results = [
     "результат операции: 42",
