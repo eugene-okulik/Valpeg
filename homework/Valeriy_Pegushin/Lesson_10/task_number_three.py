@@ -21,6 +21,7 @@ def operation_controller(func):
     # Возвращаем функцию-обертку
     return wrapper
 
+
 # Применяем декоратор к функции calc
 @operation_controller
 # Функция calc, которая выполняет арифметические операции
@@ -40,6 +41,7 @@ def calc(first, second, operation):
     # Если операция не поддерживается, вызываем ошибку
     else:
         raise ValueError("Неподдерживаемая операция")
+
 
 # Запрашиваем у пользователя ввод двух чисел
 try:
