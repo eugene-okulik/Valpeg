@@ -12,16 +12,19 @@ class Flower:
     def __str__(self):
         return f"{self.name} ({self.color}), {self.price} руб."
 
+
 # Класс розы (наследуется от Flower)
 class Rose(Flower):
     def __init__(self, color, stem_length=50.0, has_thorns=True):
         super().__init__("Роза", color, 7, stem_length, 100)
         self.has_thorns = has_thorns  # Наличие шипов у розы
 
+
 # Класс тюльпана (наследуется от Flower)
 class Tulip(Flower):
     def __init__(self, color, stem_length=30.0):
         super().__init__("Тюльпан", color, 5, stem_length, 40)
+
 
 # Класс для работы с букетами цветов
 class Bouquet:
@@ -69,6 +72,7 @@ class Bouquet:
         return (f"Букет ({len(self.flowers)} цветов)\n"
                 f"Общая стоимость: {self.total_price()} руб.\n"
                 f"Средний срок жизни: {self.average_lifespan():.1f} дней")
+
 
 # Основной блок выполнения
 if __name__ == "__main__":
