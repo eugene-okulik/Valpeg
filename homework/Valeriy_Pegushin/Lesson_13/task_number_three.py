@@ -4,10 +4,6 @@ import os
 from datetime import datetime, timedelta
 
 
-
-import os
-
-
 base_path = os.path.dirname(__file__)
 # file_path = f'{base_path}/data.txt'
 # file_path = os.path.join(base_path, 'data.txt')

@@ -26,7 +26,3 @@ print(eugene_okulik_file_path)
 
 with open(eugene_okulik_file_path) as eugene_okulik_file:
     print(eugene_okulik_file.read())
-
-
-
-

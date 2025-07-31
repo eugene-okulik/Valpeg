@@ -50,5 +50,3 @@ current_date = datetime.now()
 # Разница в днях
 delta = current_date - past_date
 print(f"Прошло дней: {delta.days}")
-
-
