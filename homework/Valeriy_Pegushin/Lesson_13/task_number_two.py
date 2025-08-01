@@ -50,8 +50,6 @@ with open(eugene_okulik_file_path) as file:
                     days_passed = (datetime.now() - date_obj).days
                     # Вывод количества прошедших дней
                     print(f"Дней прошло с {date_str}: {days_passed}")
-
-
             # Обработка ошибки при парсинге даты
             except ValueError as e:
                 # Вывод сообщения об ошибке
