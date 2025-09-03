@@ -1,8 +1,10 @@
-INSERT INTO students (name, second_name, group_id) VALUES ('Иван', 'Иванов', 1);
+INSERT INTO students (name, second_name) VALUES ('Иван', 'Иванов');
 
 INSERT INTO books (title, taken_by_student_id) VALUES ('Математический анализ', 21113), ('Основы программирования', 21113), ('Базы данных и SQL', 21113);
 
 INSERT INTO `groups` (title, start_date, end_date) VALUES ('ИТ-101', '2024-09-01', '2028-06-30');
+
+UPDATE students SET group_id = LAST_INSERT_ID() WHERE id = 21113;
 
 INSERT INTO subjects (title) VALUES ('Математический анализ'), ('Основы программирования'), ('Базы данных');
 
