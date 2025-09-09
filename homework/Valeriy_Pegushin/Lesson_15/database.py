@@ -23,7 +23,7 @@ cursor.execute(student_query, student_values)
 student_id = cursor.lastrowid
 
 # SQL-запрос для вставки нескольких книг
-books_query = """INSERT INTO books (title, taken_by_student_id) 
+books_query = """INSERT INTO books (title, taken_by_student_id)
                  VALUES (%s, %s), (%s, %s), (%s, %s)"""
 # Данные для вставки книг (названия и ID студента, который взял книги)
 books_values = (
@@ -35,7 +35,7 @@ books_values = (
 cursor.execute(books_query, books_values)
 
 # SQL-запрос для вставки новой группы (используем обратные кавычки "groups" - зарезервированное слово)
-group_query = """INSERT INTO `groups` (title, start_date, end_date) 
+group_query = """INSERT INTO `groups` (title, start_date, end_date)
                  VALUES (%s, %s, %s)"""
 # Данные для вставки группы (название, дата начала и окончания)
 group_values = ('ИТ-101', '2024-09-01', '2028-06-30')
@@ -60,22 +60,42 @@ cursor.execute("INSERT INTO subjects (title) VALUES ('Базы данных')")
 db_id = cursor.lastrowid
 
 # Добавляем уроки для каждого предмета
-cursor.execute("INSERT INTO lessons (title, subject_id) VALUES ('Введение в математический анализ. Пределы', %s)", (math_id,))
+cursor.execute(
+    "INSERT INTO lessons (title, subject_id) VALUES "
+    "('Введение в математический анализ. Пределы', %s)",
+    (math_id,)
+)
 lesson1_id = cursor.lastrowid
 
-cursor.execute("INSERT INTO lessons (title, subject_id) VALUES ('Решение задач на вычисление пределов', %s)", (math_id,))
+cursor.execute(
+    "INSERT INTO lessons (title, subject_id) VALUES "
+    "('Решение задач на вычисление пределов', %s)",
+    (math_id,)
+)
 lesson2_id = cursor.lastrowid
 
-cursor.execute("INSERT INTO lessons (title, subject_id) VALUES ('Введение в программирование. Переменные и типы данных', %s)", (prog_id,))
+cursor.execute(
+    "INSERT INTO lessons (title, subject_id) VALUES"
+    "('Введение в программирование. Переменные и типы данных', %s)", (prog_id,)
+)
 lesson3_id = cursor.lastrowid
 
-cursor.execute("INSERT INTO lessons (title, subject_id) VALUES ('Написание первой программы на Python', %s)", (prog_id,))
+cursor.execute(
+    "INSERT INTO lessons (title, subject_id) VALUES"
+    "('Написание первой программы на Python', %s)", (prog_id,)
+)
 lesson4_id = cursor.lastrowid
 
-cursor.execute("INSERT INTO lessons (title, subject_id) VALUES ('Реляционная модель данных. Нормальные формы', %s)", (db_id,))
+cursor.execute(
+    "INSERT INTO lessons (title, subject_id) VALUES"
+    "('Реляционная модель данных. Нормальные формы', %s)", (db_id,)
+)
 lesson5_id = cursor.lastrowid
 
-cursor.execute("INSERT INTO lessons (title, subject_id) VALUES ('Создание таблиц и простые SQL-запросы', %s)", (db_id,))
+cursor.execute(
+    "INSERT INTO lessons (title, subject_id) VALUES"
+    "('Создание таблиц и простые SQL-запросы', %s)", (db_id,)
+)
 lesson6_id = cursor.lastrowid
 
 # Добавляем оценки
