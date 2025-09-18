@@ -47,7 +47,7 @@ db = mysql.connect(
 cursor = db.cursor(dictionary=True)
 # SQL запрос для выборки данных из нескольких таблиц с JOIN
 query = """
-SELECT s.name, s.second_name, g.title as group_title, b.title as book_title, 
+SELECT s.name, s.second_name, g.title as group_title, b.title as book_title,
        sub.title as subject_title, l.title as lesson_title, m.value as mark_value
 FROM students s
 JOIN `groups` g ON s.group_id = g.id
@@ -74,13 +74,13 @@ for csv_row in csv_data:
         db_mark = str(db_row['mark_value']) if db_row['mark_value'] is not None else ''
 
         # Сравнение всех полей CSV строки с соответствующими полями из базы данных
-        if (csv_row['name'] == db_row['name'] and
-                csv_row['second_name'] == db_row['second_name'] and
-                csv_row['group_title'] == db_row['group_title'] and
-                csv_row['book_title'] == db_row['book_title'] and
-                csv_row['subject_title'] == db_row['subject_title'] and
-                csv_row['lesson_title'] == db_row['lesson_title'] and
-                csv_row['mark_value'] == db_mark):
+        if (csv_row['name'] == db_row['name']
+                and csv_row['second_name'] == db_row['second_name']
+                and csv_row['group_title'] == db_row['group_title']
+                and csv_row['book_title'] == db_row['book_title']
+                and csv_row['subject_title'] == db_row['subject_title']
+                and csv_row['lesson_title'] == db_row['lesson_title']
+                and csv_row['mark_value'] == db_mark):
             # Если все поля совпадают, устанавливаем флаг found в True
             found = True
             # Прерываем внутренний цикл, так как совпадение найдено
