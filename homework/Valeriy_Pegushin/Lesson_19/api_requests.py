@@ -55,6 +55,7 @@ def delete_a_post():
     response = requests.delete('http://objapi.course.qa-practice.com/object/11170')
     print(response.status_code)
 
+
 one_posts()
 post_a_post()
 put_a_post()
