@@ -5,7 +5,7 @@ import pytest
 @pytest.fixture()
 def new_post_id():
     print('before test')
-    body = {'data': {'color': 'red', 'size': 'big'},'id': 11170, 'name': 'First new object'}
+    body = {'data': {'color': 'red', 'size': 'big'}, 'id': 11170, 'name': 'First new object'}
     headers = {'Content-Type': 'application/json'}
     response = requests.post(
         'http://objapi.course.qa-practice.com/object',
@@ -37,8 +37,7 @@ def test_one_posts(new_post_id, hello):
     ('green', 'small', 11172, 'Third new object')
 ])
 
-
-def test_post_a_post(color,size,obj_id,name):
+def test_post_a_post(color, size, obj_id, name):
     print('before test')
     test_data = {
         'data': {'color': color, 'size': size},
