@@ -29,8 +29,6 @@ def new_post_id():
 @pytest.fixture(scope='session')
 def hello():
     print('Start testing')
-    yield
-    print('Testing completed')
 
 
 def test_one_posts(new_post_id, hello):
