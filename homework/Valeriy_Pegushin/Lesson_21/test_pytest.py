@@ -73,9 +73,9 @@ def test_post_a_post(color, size, obj_id, name):
         headers = {'Content-Type': 'application/json'}
     with allure.step("Отправка POST запроса для создания объекта"):
         response = requests.post(
-        'http://objapi.course.qa-practice.com/object',
-        json=test_data,
-        headers=headers
+            'http://objapi.course.qa-practice.com/object',
+            json=test_data,
+            headers=headers
         )
     with allure.step("Проверка успешного создания объекта"):
         assert response.status_code == 200
