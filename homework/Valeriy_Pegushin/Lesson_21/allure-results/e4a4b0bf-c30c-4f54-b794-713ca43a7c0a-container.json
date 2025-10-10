@@ -1,0 +1,1 @@
+{"uuid": "5bc4f9b7-906e-4498-a651-d6eb88c3d2e5", "children": ["cf1348d7-33c7-44ba-83ec-7345cbae1af8"], "befores": [{"name": "new_post_id", "status": "passed", "steps": [{"name": "Создание тестового объекта", "status": "passed", "start": 1760006818104, "stop": 1760006818104}], "start": 1760006818104, "stop": 1760006818104}], "start": 1760006818104, "stop": 1760006818343}
