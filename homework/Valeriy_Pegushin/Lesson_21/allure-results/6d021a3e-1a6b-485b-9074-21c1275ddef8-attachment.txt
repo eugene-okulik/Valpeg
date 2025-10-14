@@ -1,4 +1,0 @@
-before test
-528
-after test
-Testing completed
