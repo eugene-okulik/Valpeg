@@ -55,7 +55,7 @@ def test_create_object_without_id(create_object_endpoint):
     # Извлекаем тело запроса из тестовых данных
     body = test_data['body']
     # Отправляем POST запрос для создания объекта
-    response = create_object_endpoint.create_object(body=body)
+    create_object_endpoint.create_object(body=body)
     # Проверяем, что объект успешно создан с правильными данными
     create_object_endpoint.verify_object_successfully(
         body['name'],  # Ожидаемое имя объекта
@@ -70,7 +70,7 @@ def test_create_object(test_data, create_object_endpoint):
     # Извлекаем тело запроса из тестовых данных
     body = test_data['body']
     # Отправляем POST запрос для создания объекта
-    response = create_object_endpoint.create_object(body=body)
+    create_object_endpoint.create_object(body=body)
     # Проверяем, что объект успешно создан с правильными данными
     create_object_endpoint.verify_object_successfully(
         body['name'],  # Ожидаемое имя объекта
@@ -85,7 +85,7 @@ def test_create_object_negative_cases(test_data, create_object_endpoint):
     # Извлекаем тело запроса из тестовых данных
     body = test_data['body']
     # Отправляем POST запрос с некорректными данными
-    response = create_object_endpoint.create_object(body=body)
+    create_object_endpoint.create_object(body=body)
     # Проверяем, что статус код ответа равен 400 (ошибка клиента)
     create_object_endpoint.verify_object_creation_failed()
 
@@ -101,7 +101,7 @@ def test_create_object_not_found(test_data, create_object_endpoint):
         # Извлекаем тело запроса из тестовых данных
         body = test_data['body']
         # Отправляем POST запрос на неправильный URL
-        response = create_object_endpoint.create_object(body=body)
+        create_object_endpoint.create_object(body=body)
         # Проверяем, что статус код ответа равен 404 (не найдено)
         create_object_endpoint.verify_not_found_error()
     finally:
