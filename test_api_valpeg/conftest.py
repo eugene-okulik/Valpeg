@@ -38,13 +38,16 @@ def create_object_endpoint():
 def complete_object_update_endpoint():
     return CompleteObjectUpdate()
 
+
 @pytest.fixture()
 def partial_object_update_endpoint():
     return PartialObjectUpdate()
 
+
 @pytest.fixture()
 def get_object_endpoint():
     return GetObject()
+
 
 @pytest.fixture()
 def delete_object_endpoint():

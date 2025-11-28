@@ -40,9 +40,13 @@ NOT_FOUND_TEST_DATA = [
 ]
 
 
+# Тест получения объекта по ID
 def test_get_object(get_object_endpoint, new_object_id):
+    # Получаем объект по ID через эндпоинт
     get_object_endpoint.get_object_by_id(new_object_id)
+    # Проверяем, что полученный объект имеет правильный ID
     get_object_endpoint.verify_object_id_matches(new_object_id)
+
 
 # Тест создания объекта без указания ID
 def test_create_object_without_id(create_object_endpoint):
@@ -104,7 +108,10 @@ def test_create_object_not_found(test_data, create_object_endpoint):
         # Всегда возвращаем оригинальный URL
         create_object_endpoint.url = original_url
 
+
+# Тест полного обновления объекта (PUT запрос)
 def test_put_object(complete_object_update_endpoint, new_object_id):
+    # Тело запроса для полного обновления объекта
     body = {
         'data': {
             'color': 'yellow',
@@ -113,14 +120,19 @@ def test_put_object(complete_object_update_endpoint, new_object_id):
         'id': new_object_id,
         'name': 'Second new object'
     }
+    # Выполняем полное обновление объекта
     complete_object_update_endpoint.make_changes_object(new_object_id, body)
+    # Проверяем, что объект успешно обновлен
     complete_object_update_endpoint.verify_object_successfully(
-        body['name'],
-        body['data']['color'],
-        body['data']['size']
+        body['name'],  # Ожидаемое имя объекта
+        body['data']['color'],  # Ожидаемый цвет объекта
+        body['data']['size']  # Ожидаемый размер объекта
     )
 
+
+# Тест частичного обновления объекта (PATCH запрос)
 def test_patch_object(partial_object_update_endpoint, new_object_id):
+    # Тело запроса для частичного обновления объекта
     body = {
         'data': {
             'color': 'green',
@@ -128,17 +140,23 @@ def test_patch_object(partial_object_update_endpoint, new_object_id):
         },
         'name': 'Third new object'
     }
+    # Выполняем частичное обновление объекта
     partial_object_update_endpoint.partial_update_object(new_object_id, body)
+    # Проверяем, что статус код ответа равен 200
     partial_object_update_endpoint.check_that_status_is_200()
+    # Проверяем, что объект успешно обновлен
     partial_object_update_endpoint.verify_object_successfully(
-        body['name'],
-        body['data']['color'],
-        body['data']['size']
+        body['name'],  # Ожидаемое имя объекта
+        body['data']['color'],  # Ожидаемый цвет объекта
+        body['data']['size']  # Ожидаемый размер объекта
     )
 
+
+# Тест удаления объекта
 def test_delete_object(delete_object_endpoint, new_object_id):
-        delete_object_endpoint.delete_object_by_id(new_object_id)
-        delete_object_endpoint.verify_object_deleted_successfully()
-        delete_object_endpoint.verify_object_not_found(new_object_id)
-
-
+    # Удаляем объект по ID
+    delete_object_endpoint.delete_object_by_id(new_object_id)
+    # Проверяем, что удаление прошло успешно (статус 200)
+    delete_object_endpoint.verify_object_deleted_successfully()
+    # Проверяем, что объект действительно удален (статус 404 при попытке получить)
+    delete_object_endpoint.verify_object_not_found(new_object_id)
