@@ -20,20 +20,15 @@ class DeleteObject(Endpoint):
     # Метод проверки успешного удаления объекта
     @allure.step("Проверка успешного удаления объекта")
     def verify_object_deleted_successfully(self):
-        # Проверка, что статус код ответа равен 200 (Успех)
-        assert self.response.status_code == 200, (
-            # Сообщение об ошибке, если статус код не соответствует ожидаемому
-            f"Expected status code 200, but got {self.response.status_code}"
-        )
+        # Используем метод из родительского класса для проверки статус-кода 200
+        self.check_that_status_is_200()
 
     # Метод проверки, что объект действительно удален (не найден)
     @allure.step("Проверка что объект действительно удален")
     def verify_object_not_found(self, object_id):
         # Отправка GET запроса для проверки существования объекта
         check_response = requests.get(f'{self.url}/{object_id}')
-        # Проверка, что статус код ответа равен 404 (Не найдено)
-        assert check_response.status_code == 404, (
-            # Сообщение об ошибке, если объект все еще существует
-            f"Expected status code 404 after deletion, but got "
-            f"{check_response.status_code}"
-        )
+        # Сохраняем response в self.response для использования метода из родительского класса
+        self.response = check_response
+        # Используем метод из родительского класса для проверки статус-кода 404
+        self.check_not_found_error()

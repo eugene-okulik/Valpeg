@@ -3,14 +3,13 @@ import pytest  # Фреймворк для написания тестов
 
 # Данные для позитивных тестов (успешное создание объектов)
 TEST_DATA = [
-    # Первый набор данных для теста создания объекта без ID
+    # Первый набор данных для теста создания объекта
     {'body': {'data': {'color': 'red', 'size': 'big'}, 'name': 'First new object'}},
-    # Второй набор данных для параметризованного теста
-    {'body': {'data': {'color': 'red', 'size': 'big'}, 'name': 'First new object'}},
-    # Третий набор данных для параметризованного теста
+    # Второй набор данных для теста создания объекта
     {'body': {'data': {'color': 'blue', 'size': 'medium'}, 'name': 'Second new object'}},
-    # Четвертый набор данных для параметризованного теста
+    # Третий набор данных для теста создания объекта
     {'body': {'data': {'color': 'green', 'size': 'small'}, 'name': 'Third new object'}}
+
 ]
 
 # Данные для негативных тестов (ожидаемые ошибки)
@@ -48,24 +47,8 @@ def test_get_object(get_object_endpoint, new_object_id):
     get_object_endpoint.verify_object_id_matches(new_object_id)
 
 
-# Тест создания объекта без указания ID
-def test_create_object_without_id(create_object_endpoint):
-    # Берем первый набор данных из TEST_DATA
-    test_data = TEST_DATA[0]
-    # Извлекаем тело запроса из тестовых данных
-    body = test_data['body']
-    # Отправляем POST запрос для создания объекта
-    create_object_endpoint.create_object(body=body)
-    # Проверяем, что объект успешно создан с правильными данными
-    create_object_endpoint.verify_object_successfully(
-        body['name'],  # Ожидаемое имя объекта
-        body['data']['color'],  # Ожидаемый цвет объекта
-        body['data']['size']  # Ожидаемый размер объекта
-    )
-
-
-# Параметризованный тест для создания объектов с разными данными
-@pytest.mark.parametrize("test_data", TEST_DATA[1:])  # Используем все данные кроме первого
+# Тест для создания объектов с разными данными
+@pytest.mark.parametrize("test_data", TEST_DATA)
 def test_create_object(test_data, create_object_endpoint):
     # Извлекаем тело запроса из тестовых данных
     body = test_data['body']
@@ -79,7 +62,7 @@ def test_create_object(test_data, create_object_endpoint):
     )
 
 
-# Параметризованный тест для негативных сценариев
+# Тест для негативных сценариев (400)
 @pytest.mark.parametrize("test_data", NEGATIVE_TEST_DATA)  # Используем все негативные данные
 def test_create_object_negative_cases(test_data, create_object_endpoint):
     # Извлекаем тело запроса из тестовых данных
@@ -87,26 +70,22 @@ def test_create_object_negative_cases(test_data, create_object_endpoint):
     # Отправляем POST запрос с некорректными данными
     create_object_endpoint.create_object(body=body)
     # Проверяем, что статус код ответа равен 400 (ошибка клиента)
-    create_object_endpoint.verify_object_creation_failed()
+    create_object_endpoint.check_bad_request()
 
 
-# Параметризованный тест для проверки ошибок "не найдено" (404)
+# Тест для проверки ошибок "не найдено" (404)
 @pytest.mark.parametrize("test_data", NOT_FOUND_TEST_DATA)
 def test_create_object_not_found(test_data, create_object_endpoint):
-    # Сохраняем оригинальный URL
-    original_url = create_object_endpoint.url
-    try:
-        # Временно меняем URL на неправильный
-        create_object_endpoint.url = test_data['url']
-        # Извлекаем тело запроса из тестовых данных
-        body = test_data['body']
-        # Отправляем POST запрос на неправильный URL
-        create_object_endpoint.create_object(body=body)
-        # Проверяем, что статус код ответа равен 404 (не найдено)
-        create_object_endpoint.verify_not_found_error()
-    finally:
-        # Всегда возвращаем оригинальный URL
-        create_object_endpoint.url = original_url
+    # Извлекаем тело запроса и URL из тестовых данных
+    body = test_data['body']
+    wrong_url = test_data['url']
+
+    # Отправляем POST запрос на неправильный URL
+    create_object_endpoint.url = wrong_url
+    create_object_endpoint.create_object(body=body)
+
+    # Используем метод из родительского класса Endpoint для проверки ошибки 404
+    create_object_endpoint.check_not_found_error()
 
 
 # Тест полного обновления объекта (PUT запрос)
@@ -132,23 +111,17 @@ def test_put_object(complete_object_update_endpoint, new_object_id):
 
 # Тест частичного обновления объекта (PATCH запрос)
 def test_patch_object(partial_object_update_endpoint, new_object_id):
-    # Тело запроса для частичного обновления объекта
-    body = {
-        'data': {
-            'color': 'green',
-            'size': 'very big'
-        },
-        'name': 'Third new object'
-    }
+    # Обновляем только имя, цвет и размер должны остаться прежними
+    body = {'name': 'Third new object - updated name only'}
     # Выполняем частичное обновление объекта
     partial_object_update_endpoint.partial_update_object(new_object_id, body)
-    # Проверяем, что статус код ответа равен 200
-    partial_object_update_endpoint.check_that_status_is_200()
     # Проверяем, что объект успешно обновлен
+    # Ожидаем новое имя, но старые значения цвета и размера
+    # Метод verify_object_successfully() уже проверяет статус код 200 внутри себя
     partial_object_update_endpoint.verify_object_successfully(
-        body['name'],  # Ожидаемое имя объекта
-        body['data']['color'],  # Ожидаемый цвет объекта
-        body['data']['size']  # Ожидаемый размер объекта
+        'Third new object - updated name only',  # Новое имя
+        'red',  # Цвет должен остаться как в фикстуре
+        'big'  # Размер должен остаться как в фикстуре
     )
 
 

@@ -20,18 +20,3 @@ class CreateObject(Endpoint):
         )
         # Возвращаем объект ответа
         return self.response
-
-    # Метод для проверки неудачного создания объекта
-    @allure.step("Проверка ошибки создания объекта")
-    def verify_object_creation_failed(self):
-        # Проверяем только статус код 400 (ошибка клиента)
-        assert self.response.status_code == 400, (
-            f"Expected status code 400, but got {self.response.status_code}"
-        )
-
-    # Метод для проверки ошибки "не найдено" (404)
-    @allure.step("Проверка ошибки 'не найдено' (404)")
-    def verify_not_found_error(self):
-        assert self.response.status_code == 404, (
-            f"Expected status code 404, but got {self.response.status_code}"
-        )

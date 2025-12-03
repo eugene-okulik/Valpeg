@@ -24,9 +24,9 @@ def new_object_id():
         json=body,
         headers=headers
     )
-    post_id = response.json()['id']
-    yield post_id
-    requests.delete(f'http://objapi.course.qa-practice.com/object/{post_id}')
+    object_id = response.json()['id']
+    yield object_id
+    requests.delete(f'http://objapi.course.qa-practice.com/object/{object_id}')
 
 
 @pytest.fixture()
