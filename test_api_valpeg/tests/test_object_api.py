@@ -1,6 +1,7 @@
 # Импорт необходимых библиотек
 import pytest  # Фреймворк для написания тестов
 
+
 # Данные для позитивных тестов (успешное создание объектов)
 TEST_DATA = [
     # Первый набор данных для теста создания объекта
@@ -110,7 +111,7 @@ def test_put_object(complete_object_update_endpoint, new_object_id):
 
 
 # Тест частичного обновления объекта (PATCH запрос)
-def test_patch_object(partial_object_update_endpoint, new_object_id):
+def test_patch_object(partial_object_update_endpoint, new_object_id, default_test_data):
     # Обновляем только имя, цвет и размер должны остаться прежними
     body = {'name': 'Third new object - updated name only'}
     # Выполняем частичное обновление объекта
@@ -119,9 +120,9 @@ def test_patch_object(partial_object_update_endpoint, new_object_id):
     # Ожидаем новое имя, но старые значения цвета и размера
     # Метод verify_object_successfully() уже проверяет статус код 200 внутри себя
     partial_object_update_endpoint.verify_object_successfully(
-        'Third new object - updated name only',  # Новое имя
-        'red',  # Цвет должен остаться как в фикстуре
-        'big'  # Размер должен остаться как в фикстуре
+        body['name'],  # Новое имя
+        default_test_data['data']['color'],  # Цвет должен остаться как в фикстуре
+        default_test_data['data']['size']  # Размер должен остаться как в фикстуре
     )
 
 

@@ -5,28 +5,19 @@ from endpoints.complete_object_update import CompleteObjectUpdate
 from endpoints.partial_object_update import PartialObjectUpdate
 from endpoints.get_object import GetObject
 from endpoints.delete_object import DeleteObject
+from data import default_body
 
 
 @pytest.fixture()
-def new_object_id():
+def new_object_id(create_object_endpoint, delete_object_endpoint):
     print('before test')
-    body = {
-        'data': {
-            'color': 'red',
-            'size': 'big'
-        },
-        'id': 11170,
-        'name': 'First new object'
-    }
-    headers = {'Content-Type': 'application/json'}
-    response = requests.post(
-        'http://objapi.course.qa-practice.com/object',
-        json=body,
-        headers=headers
-    )
-    object_id = response.json()['id']
+    # Используем метод create_object из класса CreateObject
+    create_object_endpoint.create_object(body=default_body)
+    # Получаем ID созданного объекта из ответа
+    object_id = create_object_endpoint.response.json()['id']
     yield object_id
-    requests.delete(f'http://objapi.course.qa-practice.com/object/{object_id}')
+    # Используем метод delete_object_by_id из класса DeleteObject
+    delete_object_endpoint.delete_object_by_id(object_id)
 
 
 @pytest.fixture()
@@ -52,3 +43,8 @@ def get_object_endpoint():
 @pytest.fixture()
 def delete_object_endpoint():
     return DeleteObject()
+
+
+@pytest.fixture()
+def default_test_data():
+    return default_body
