@@ -24,7 +24,7 @@ class LoadTestUser(HttpUser):
             self.client.get(f'/{self.new_id}')
 
     @task(3)
-    def get_one_object_test(self):
+    def get_one_object_random_test(self):
         # Просто выбираем один из трех ID
         object_id = random.choice([36, 204, 1971])
         self.client.get(f'/{object_id}')
