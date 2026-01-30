@@ -5,17 +5,17 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pytest
-#from time import sleep
+# from time import sleep
 
 
 @pytest.fixture()
 def driver():
     chrome_driver = webdriver.Chrome()
-    #chrome_driver.implicitly_wait(10)
-    #sleep(3)
-    chrome_driver.maximize_window() #Открытие страницы на весь экран
+    # chrome_driver.implicitly_wait(10)
+    # sleep(3)
+    chrome_driver.maximize_window() # Открытие страницы на весь экран
     yield chrome_driver
-    #sleep(3)
+    # sleep(3)
 
 
 def test_result_text(driver):
@@ -35,7 +35,7 @@ def test_result_text(driver):
 
 def test_student_registration_form(driver):
     driver.get("https://demoqa.com/automation-practice-form")
-    #sleep(3)
+    # sleep(3)
     driver.find_element(By.ID, 'firstName').send_keys('Valeriy')
     driver.find_element(By.ID, 'lastName').send_keys('Pegushin')
     driver.find_element(By.ID, 'userEmail').send_keys('valpegushin@yandex.ru')
@@ -44,19 +44,19 @@ def test_student_registration_form(driver):
     date_of_birth_input = driver.find_element(By.ID, 'dateOfBirthInput')
     driver.execute_script("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", date_of_birth_input)
     date_of_birth_input.click()
-    #driver.find_element(By.ID, 'dateOfBirthInput').click()
-    #sleep(2)
+    # driver.find_element(By.ID, 'dateOfBirthInput').click()
+    # sleep(2)
     driver.find_element(By.CLASS_NAME, 'react-datepicker__year-select').click()
-    #sleep(1)
+    # sleep(1)
     driver.find_element(By.XPATH, "//option[@value='1971']").click()
     driver.find_element(By.CLASS_NAME, 'react-datepicker__month-select').click()
-    #sleep(1)
+    # sleep(1)
     driver.find_element(By.XPATH, "//option[@value='2']").click()
     driver.find_element(
         By.XPATH,
         "//div[contains(@class, 'react-datepicker__day--016') and text()='16']"
     ).click()
-    #sleep(2)
+    # sleep(2)
     subjects_input = driver.find_element(By.ID, "subjectsInput")
     driver.execute_script("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", subjects_input)
     driver.execute_script("arguments[0].click();", subjects_input)
@@ -81,7 +81,7 @@ def test_student_registration_form(driver):
     delhi_option.click()
     submit_btn = driver.find_element(By.ID, "submit")
     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", submit_btn)
-    #sleep(1)
+    # sleep(1)
     submit_btn.click()
 
     print("\n" + "=" * 50)
@@ -118,5 +118,3 @@ def test_hello_world(driver):
         EC.visibility_of_element_located((By.XPATH, '//*[@id="finish"]/h4'))
     )
     assert hello_world.text == "Hello World!"
-
-
