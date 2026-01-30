@@ -13,7 +13,7 @@ def driver():
     chrome_driver = webdriver.Chrome()
     # chrome_driver.implicitly_wait(10)
     # sleep(3)
-    chrome_driver.maximize_window() # Открытие страницы на весь экран
+    chrome_driver.maximize_window()  # Открытие страницы на весь экран
     yield chrome_driver
     # sleep(3)
 
@@ -23,7 +23,7 @@ def test_result_text(driver):
     driver.get("https://www.qa-practice.com/elements/input/simple")
     text_string = driver.find_element(By.ID, "id_text_string")
     text_string.send_keys(input_data)
-    #text_string.submit()
+    # text_string.submit()
     text_string.send_keys(Keys.ENTER)
     result_text = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.ID, "result-text"))
