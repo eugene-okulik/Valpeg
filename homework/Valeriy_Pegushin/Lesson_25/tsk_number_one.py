@@ -41,6 +41,7 @@ def test_student_registration_form(driver):
     driver.find_element(By.ID, 'userEmail').send_keys('valpegushin@yandex.ru')
     driver.find_element(By.XPATH, '//label[@for="gender-radio-1"]').click()
     driver.find_element(By.ID, 'userNumber').send_keys('9128844779')
+    # sleep(2)
     date_of_birth_input = driver.find_element(By.ID, 'dateOfBirthInput')
     driver.execute_script("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", date_of_birth_input)
     date_of_birth_input.click()
