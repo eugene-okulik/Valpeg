@@ -19,11 +19,11 @@ def driver():
     # sleep(3)
 
 
-def test_new_tab (driver):
+def test_new_tab(driver):
     driver.get('http://testshop.qa-practice.com/')
     expected_product = "Customizable Desk"
     print(f"Добавляем товар: {expected_product}")
-    product_image = driver.find_element(By.XPATH,"//img[@alt='Customizable Desk']")
+    product_image = driver.find_element(By.XPATH, "//img[@alt='Customizable Desk']")
     actions = ActionChains(driver)
     actions.key_down(Keys.COMMAND).click(product_image).key_up(Keys.COMMAND).perform()
     # sleep(3)
@@ -51,7 +51,7 @@ def test_new_tab (driver):
     second_cart_link.click()
     # sleep(3)
     cart_product_name = driver.find_element(
-        By.XPATH,"//h6[contains(@class, 'h6') and contains(text(), 'Customizable Desk')]"
+        By.XPATH, "//h6[contains(@class, 'h6') and contains(text(), 'Customizable Desk')]"
     ).text
     print(f"✓ Товар в корзине: {cart_product_name}")
     assert expected_product in cart_product_name, f"Ожидался '{expected_product}', найден '{cart_product_name}'"
@@ -72,11 +72,3 @@ def test_cart_button(driver):
         By.XPATH, "(//strong[@class='product-name product_display_name'])[1]"
     )
     print(f"Товар: {product_element.text}")
-
-
-
-
-
-
-
-
