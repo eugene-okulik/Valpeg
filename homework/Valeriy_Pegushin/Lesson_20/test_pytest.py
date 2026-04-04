@@ -40,6 +40,27 @@ def test_one_posts(new_post_id, hello):
     assert response['id'] == new_post_id
 
 
+def test_create_object():
+    body = {
+        'data': {
+            'color': 'red',
+            'size': 'big'
+        },
+        'name': 'First new object'
+    }
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(
+        'http://objapi.course.qa-practice.com/object',
+        json=body,
+        headers=headers
+    )
+    assert response.status_code == 200
+    response_json = response.json()
+    assert response_json['name'] == 'First new object'
+    assert response_json['data']['color'] == 'red'
+    assert response_json['data']['size'] == 'big'
+
+
 @pytest.mark.parametrize(
     "color, size, obj_id, name",
     [
