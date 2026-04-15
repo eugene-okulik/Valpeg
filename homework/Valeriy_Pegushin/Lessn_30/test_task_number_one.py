@@ -17,5 +17,3 @@ def test_iphone_17_pro_modal_with_mocked_name(page: Page):
     page.locator('.rf-hcard-copy').locator('nth=0').click()
     modal_header = page.locator('#rf-digitalmat-overlay-label-0').locator('nth=0')
     expect(modal_header).to_contain_text("яблокофон 17 про")
-
-
