@@ -6,4 +6,5 @@ venv
 __pycache__
 credentials.py
 .env
-
+test_UI_testshop_valpeg_pw/
+test_valpeg_testshop_ui/
