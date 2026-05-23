@@ -1,0 +1,23 @@
+ssh -i /Users/valpeg/.ssh/id_ed25519 valpeg@164.92.136.89
+
+Команды, с помощью которых можно выполнять действия:
+Go to first line in file: g # Перейти к самой первой строке файла
+Go to last line in file: G # Перейти к самой последней строке файла
+Forward one window: f или Space # Пролистать вперед на одно окно (на весь экран)
+Forward one line: j или Ctrl+E	# Прокрутить текст вперед на одну строку
+Backward one line: y или Ctrl+Y	# Прокрутить текст назад на одну строку
+Search forward for matching line: /pattern	# Искать указанный шаблон (pattern) вперед по тексту
+Search backward for matching line: ?pattern	# Искать указанный шаблон (pattern) назад по тексту
+Repeat previous search: n	# Повторить последний поиск (в том же направлении)
+Repeat previous search in reverse direction: N	# Повторить последний поиск, но в противоположном направлении
+
+Определите типы этих файлов:
+/dev/null # файл символьного устройства
+/dev/zero # файл символьного устройства
+/dev/sda # файл отсутствует
+/dev/tty # файл символьного устройства
+/root # элемент файловой системы, каталог (директория)
+/etc/passwd # обычный файл
+/proc/mounts # символическая ссылка
+/bin/ls # обычный файл
+/bin/zcat # обычный файл
